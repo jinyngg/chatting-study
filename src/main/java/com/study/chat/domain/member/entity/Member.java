@@ -1,8 +1,12 @@
-package com.study.chat.domain.client.entity;
+package com.study.chat.domain.member.entity;
 
 import com.study.chat.common.entity.BaseEntity;
+import com.study.chat.domain.chat.entity.ConnectedChatRoom;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +27,11 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "member")
+    private List<ConnectedChatRoom> connectedChatRooms = new ArrayList<>();
+
+    public void createName(String name) {
+        this.name = name;
+    }
 }
